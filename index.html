@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMLのタイトル</title>
+    
+    <style>
+        
+        :root {
+            --primary-color: #00CD68;
+            --secondary-color: #2c3e50;
+            --background-color: #ecf0f1;
+            --text-color: #34495e;
+            --accent-color: #e74c3c;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hotel-cards {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+        }
+
+        .hotel-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 40%;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .hotel-card h2 {
+            color: var(--secondary-color);
+        }
+
+        .hotel-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .reserve-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .reserve-button:hover {
+            background-color: #00B05C;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        footer ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ホテルサイトのタイトル</h1>
+        <div class="hotel-cards">
+            <div class="hotel-card">
+                <img src="部屋の画像のURL" alt="部屋名のタグ">
+                <h2>部屋1</h2>
+                 <h3>1泊/xxxxx円・2泊/xxxxx円</h3>
+                 <p>最大宿泊人数: x名</p>
+                 
+                <button class="reserve-button" onclick="selectRoom('展望風呂付和洋室（S1）')">予約する</button>
+            </div>
+            <div class="hotel-card">
+                <img src="https://www.bokai.jp/room/img/s2_01.jpg" alt="展望風呂付和洋室（S2）">
+                <h2>展望風呂付和洋室（S2）</h2>
+                <h3>1泊/200,000円・2泊/350,000円</h3>
+                <p>最大宿泊人数: 8名</p>
+             
+                <button class="reserve-button" onclick="selectRoom('展望風呂付和洋室（S2）')">予約する</button>
+            </div>
+            
+        </div>
+        <div class="hotel-cards">
+            <div class="hotel-card">
+                <img src="https://www.bokai.jp/room/img/s3_01.jpg" alt="展望風呂付和洋室（S3）">
+                <h2>展望風呂付和洋室（S3）</h2>
+                <h3>1泊/200,000円・2泊/350,000円</h3>
+                <p>最大宿泊人数: 6名</p>
+                
+                <button class="reserve-button" onclick="selectRoom('展望風呂付和洋室（S3）')">予約する</button>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://www.bokai.jp/room/img/roten_01.jpg" alt="露天風呂付客室（R1）">
+                <h2>露天風呂付客室（R1）</h2>
+                <h3>1泊/200,000円・2泊/350,000円</h3>
+                <p>最大宿泊人数: 6名</p>
+                
+                <button class="reserve-button" onclick="selectRoom('露天風呂付客室（R1）')">予約する</button>
+            </div>
+            
+        </div>
+        <div class="hotel-cards">
+            <div class="hotel-card">
+                <img src="https://www.bokai.jp/room/img/roten_02.jpg" alt="露天風呂付客室（R2）">
+                <h2>露天風呂付客室（R2）</h2>
+                <h3>1泊/200,000円・2泊/350,000円</h3>
+                <p>最大宿泊人数: 6名</p>
+                
+                <button class="reserve-button" onclick="selectRoom('露天風呂付客室（R2）')">予約する</button>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://www.bokai.jp/room/img/roten_03.jpg" alt="露天風呂付客室（R3）">
+                <h2>露天風呂付客室（R3）</h2>
+                <h3>1泊/200,000円・2泊/350,000円</h3>
+                <p>最大宿泊人数: 6</p>
+                
+                <button class="reserve-button" onclick="selectRoom('露天風呂付客室（R3）')">予約する</button>
+            </div>
+        </div>
+         <div class="hotel-cards">
+            <div class="hotel-card">
+                <img src="https://www.bokai.jp/room/img/wa_01.jpg" alt="和室（8畳）">
+                <h2>和室（8畳）</h2>
+                <h3>1泊/110,000円・2泊/192,500円</h3>
+                <p>最大宿泊人数: 4</p>
+                
+                <button class="reserve-button" onclick="selectRoom('和室（8畳）')">予約する</button>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://www.bokai.jp/room/img/wa_01.jpg" alt="和室（別府タワー側）">
+                <h2>和室（別府タワー側）</h2>
+                <h3>1泊/120,000円・2泊/210,000円</h3>
+                <p>最大宿泊人数: 4</p>
+               
+                <button class="reserve-button" onclick="selectRoom('和室（別府タワー側）')">予約する</button>
+            </div>
+        </div>
+        <div class="hotel-cards">
+            <div class="hotel-card">
+                <img src="https://www.bokai.jp/room/img/wa_01.jpg" alt="和室（海側・10畳以上）">
+                <h2>和室（海側・10畳以上）</h2>
+                <h3>1泊/120,000円・2泊/215,000円</h3>
+                <p>最大宿泊人数: 4</p>
+                
+                <button class="reserve-button" onclick="selectRoom('和室（海側）')">予約する</button>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://www.bokai.jp/room/img/you_01.jpg" alt="洋室（ツイン）">
+                <h2>洋室（ツイン）海側</h2>
+                <h3>1泊/110,000円・2泊/192,500円</h3>
+                <p>最大宿泊人数: 2</p>
+                <button class="reserve-button" onclick="selectRoom('洋室（ツイン）')">予約する</button>
+
+               
+            </div>
+        </div>
+        <div class="hotel-cards">
+            <div class="hotel-card">
+                <img src="https://www.bokai.jp/room/img/wayou_01.jpg" alt="和洋室（海側）">
+                <h2>和洋室（海側）</h2>
+                <h3>1泊/120,000円・2泊/210,000円</h3>
+                <p>最大宿泊人数: 4</p>
+                
+                <button class="reserve-button" onclick="selectRoom('和洋室（海側）')">予約する</button>
+            </div>
+
+            <div class="hotel-card">
+                <img src="https://www.bokai.jp/room/img/wayou_01.jpg" alt="海の見える和洋室（海側）">
+                <h2>海の見える和洋室（海側）</h2>
+                <h3>1泊/140,000円・2泊/245,000円</h3>
+                <p>最大宿泊人数: 4</p>
+                <button class="reserve-button" onclick="selectRoom('海の見える和洋室（海側）')">予約する</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <ul>
+            <li><a href="https://www.reiwatravel.co.jp/">運営会社</a></li>
+            <li><a href="https://newt.net/terms">利用規約</a></li>
+            <li><a href="https://newt.net/privacy">プライバシーポリシー</a></li>
+            <li><a href="https://newt.net/license">旅行業登録票</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        function selectRoom(roomType) {
+            google.script.run.withSuccessHandler(function(url) {
+                window.location.href = url;
+            }).getRoomUrl(roomType);
+        }
+    </script>
+</body>
+</html>

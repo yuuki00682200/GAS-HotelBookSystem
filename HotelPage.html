@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>部屋名</title>
+    <style>
+        :root {
+            --primary-color: #00CD68;
+            --secondary-color: #2c3e50;
+            --background-color: #ecf0f1;
+            --text-color: #34495e;
+            --accent-color: #e74c3c;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hotel-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        select, input[type="text"], input[type="email"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #00B05C;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #2ecc71;
+            color: #fff;
+        }
+
+        .error {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .stripe-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #5469d4;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .stripe-link:hover {
+            background-color: #4a5fc1;
+        }
+
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            form {
+                padding: 20px;
+            }
+        }
+
+        .stock-info {
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        #result a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        #result a:hover {
+            text-decoration: none;
+        }
+
+        #result p {
+            color: white;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>部屋名</h1>
+        
+        <img src=画像URL" alt="画像への内部タグ" class="hotel-image">
+        
+        <form id="myForm">
+            <label for="option">予約オプション:</label>
+            <select id="option" name="option" required onchange="updateStockInfo()">
+                <option value="">選択してください</option>
+                <option value="スプレッドシートとそろえる">2泊 8/31 IN-9/2 OUT</option>
+                <option value="スプレッドシートとそろえる">1泊 8/31 IN-9/1 OUT</option>
+                <option value="スプレッドシートとそろえる">1泊 9/1 IN-9/2 OUT</option>
+            </select>
+            <div id="stockInfo" class="stock-info"></div>
+
+            <label for="guests">宿泊人数:</label>
+            <select id="guests" name="guests" required>
+                <option value="">選択してください</option>
+                <option value="1">1名</option>
+                <option value="2">2名</option>
+                <option value="3">3名</option>
+                <option value="4">4名</option>
+            </select>
+
+            <label for="name">お名前:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">メールアドレス:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">電話番号:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <input type="submit" value="予約する">
+
+            <!-- 隠しフィールドを追加 -->
+            <input type="hidden" id="oneNightUrl" value="決済URL">
+            <input type="hidden" id="twoNightsUrl" value="決済URL">
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        function updateStockInfo() {
+            var option = document.getElementById('option').value;
+            if (option) {
+                document.getElementById('stockInfo').innerHTML = '残り在庫数を確認中...';
+                google.script.run.withSuccessHandler(function(stock) {
+                    document.getElementById('stockInfo').innerHTML = '残り在庫数: ' + stock;
+                }).getStockInfo('部屋名', option);
+            } else {
+                document.getElementById('stockInfo').innerHTML = '';
+            }
+        }
+
+        document.getElementById('myForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (this.checkValidity()) {
+                var formData = {
+                    roomType: '部屋名',
+                    option: this.option.value,
+                    guests: this.guests.value,
+                    name: this.name.value,
+                    email: this.email.value,
+                    phone: this.phone.value
+                };
+
+                // 予約オプションに基づいてStripe URLを選択
+                var stripeUrl = formData.option.includes('2泊') 
+                    ? document.getElementById('twoNightsUrl').value
+                    : document.getElementById('oneNightUrl').value;
+
+                document.getElementById('loading').style.display = 'block';
+
+                google.script.run
+                    .withSuccessHandler(function(result) {
+                        document.getElementById('loading').style.display = 'none';
+
+                        var resultDiv = document.getElementById('result');
+                        resultDiv.innerHTML = result.message;
+                        resultDiv.className = result.success ? 'success' : 'error';
+                        
+                        if (result.success) {
+                            var agreementText = document.createElement('p');
+                            agreementText.innerHTML = '<a href="約款のせる" target="_blank">予約条件</a>に同意して決済します';
+                            resultDiv.appendChild(agreementText);
+
+                            var link = document.createElement('a');
+                            link.href = stripeUrl;
+                            link.target = '_blank';
+                            link.textContent = '決済ページへ進む';
+                            link.className = 'stripe-link';
+                            resultDiv.appendChild(link);
+                        }
+                    })
+                    .withFailureHandler(function(error) {
+                        document.getElementById('loading').style.display = 'none';
+
+                        var resultDiv = document.getElementById('result');
+                        resultDiv.innerHTML = 'エラー: ' + error.message;
+                        resultDiv.className = 'error';
+                    })
+                    .saveTempReservation(formData);
+            } else {
+                this.reportValidity();
+            }
+        });
+    </script>
+</body>
+</html>
